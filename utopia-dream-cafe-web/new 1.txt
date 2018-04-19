@@ -1,0 +1,42 @@
+$firstname = _POST["firstname"];
+$lastname = _POST["lastname"];
+$email = _POST["email"];
+$message = _POST["message"];
+unset($invalid_email);
+unset($empty_email);
+unset($empty_firstname);
+unset($empty_lastname);
+unset($empty_message);
+if($firstname){
+	filter($firstname);
+}
+else{
+	$empty_firstname=true;
+}
+if($lastname){
+	filter($lastname);
+}
+else{
+	$empty_lastname=true;
+}
+if($email){
+	$email = filter_var($email,FILTER_VALIDATE_EMAIL);
+}
+else{
+	$empty_email=true;
+}	
+if($message){
+	filter($message);
+}
+else{
+	$empty_message=true;
+}
+
+
+
+function filter($info){
+		$info=trim($info);
+		$info=stripslashes($info);
+		$info=htmlspecialchars($info);
+		return $info;
+}
